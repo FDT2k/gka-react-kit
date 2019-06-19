@@ -2,7 +2,7 @@
   "name": "@geekagency/gka-react-redux-starter",
   "version": "1.0.0",
   "description": "react-redux app utils and quick start",
-  "main": "index.js",
+  "main": "src/",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node_modules/@babel/cli/bin/babel.js --out-dir lib  src && node lib/index.js"
