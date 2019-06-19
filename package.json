@@ -1,6 +1,6 @@
 {
   "name": "@geekagency/gka-react-redux-starter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "react-redux app utils and quick start",
   "main": "src/",
   "scripts": {
