@@ -1,11 +1,4 @@
 
-import createStore from './store'
-import ReduxThunk from 'redux-thunk';
 
-
-let store = createStore({},[ReduxThunk]);
-
-
-import reducerRegistry from './registry';
-
-console.log(reducerRegistry._reducers)
+export const reducerRegistry = require('./registry').default
+export const createStore = require('./store').default

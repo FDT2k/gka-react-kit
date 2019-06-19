@@ -3,7 +3,8 @@
 import { combineReducers, createStore,applyMiddleware } from 'redux';
 import reducerRegistry from './registry';
 
-const factory = (initialState={},middlewares=[])=>{
+const factory = (initialState={},middlewares=[],options={})=>{
+
   // Preserve initial state for not-yet-loaded reducers
   const combine = (reducers) => {
     const reducerNames = Object.keys(reducers);
