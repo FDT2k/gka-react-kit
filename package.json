@@ -1,0 +1,24 @@
+{
+  "name": "@geekagency/gka-react-redux-starter",
+  "version": "1.0.0",
+  "description": "react-redux app utils and quick start",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node_modules/@babel/cli/bin/babel.js --out-dir lib  src && node lib/index.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "jest": "^24.8.0"
+  }
+}
