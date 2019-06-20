@@ -2,10 +2,10 @@
   "name": "@geekagency/gka-react-redux-starter",
   "version": "1.0.2",
   "description": "react-redux app utils and quick start",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node_modules/@babel/cli/bin/babel.js --out-dir lib  src && node lib/index.js"
+    "build": "node_modules/@babel/cli/bin/babel.js --out-dir lib  src && node lib/index.js"
   },
   "author": "",
   "license": "MIT",
@@ -19,6 +19,8 @@
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.2",
+    "eslint": "^5.16.0",
     "jest": "^24.8.0"
   }
 }
