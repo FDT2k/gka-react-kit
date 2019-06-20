@@ -1,5 +1,5 @@
 /*global localStorage*/
-import {factory as createRequest,withState} from "../xhr/ajaxfactory";
+import {factory as createRequest,withState} from "../../xhr/ajaxfactory";
 
 
 

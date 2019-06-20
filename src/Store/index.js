@@ -1,7 +1,7 @@
 
 
 import { combineReducers, createStore,applyMiddleware } from "redux";
-import reducerRegistry from "./registry";
+import reducerRegistry from "../Registry";
 
 const factory = (initialState={},middlewares=[])=>{
 
