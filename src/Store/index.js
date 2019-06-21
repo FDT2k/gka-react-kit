@@ -7,8 +7,8 @@ import reducerRegistry from "../Registry";
 export const createDefaultStoreWithMiddlewares= ()=>{
 
 	//redux middlewares
-	let ReduxPromise = require('redux-promise');
-	let ReduxThunk = require('redux-thunk');
+	let {default: ReduxPromise} = require('redux-promise');
+	let {default: ReduxThunk} = require('redux-thunk');
 
 	let reduxMiddlewares = [];
 
