@@ -3,6 +3,28 @@
 import { combineReducers, createStore,applyMiddleware } from "redux";
 import reducerRegistry from "../Registry";
 
+
+export const createDefaultStoreWithMiddlewares= ()=>{
+
+	//redux middlewares
+	let ReduxPromise = require('redux-promise');
+	let ReduxThunk = require('redux-thunk');
+
+	let reduxMiddlewares = [];
+
+	if (process.env.NODE_ENV === 'dev') {
+	 const { logger } = require('redux-logger');
+	 reduxMiddlewares.push(logger);
+	}
+
+	reduxMiddlewares.push(ReduxThunk);
+	reduxMiddlewares.push(ReduxPromise);
+
+	return factory({},reduxMiddlewares)
+
+}
+
+
 const factory = (initialState={},middlewares=[])=>{
 
 	// Preserve initial state for not-yet-loaded reducers
@@ -31,24 +53,3 @@ const factory = (initialState={},middlewares=[])=>{
 };
 
 export default factory;
-
-
-export function createDefaultStoreWithMiddlewares(){
-
-	//redux middlewares
-	let ReduxPromise = require('redux-promise');
-	let ReduxThunk = require('redux-thunk');
-
-	let reduxMiddlewares = [];
-
-	if (process.env.NODE_ENV === 'dev') {
-	 const { logger } = require('redux-logger');
-	 reduxMiddlewares.push(logger);
-	}
-
-	reduxMiddlewares.push(ReduxThunk);
-	reduxMiddlewares.push(ReduxPromise);
-
-	return factory({},reduxMiddlewares)
-
-}
