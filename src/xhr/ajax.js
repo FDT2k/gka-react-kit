@@ -3,17 +3,12 @@
 import axios from "axios";
 import _ from "lodash";
 
-export const ROOT_URL= API_URL;
-export const getAPIUrl=(urlpart)=>{
-	return `${ROOT_URL}${urlpart}`;
-};
-
 export const _createRequest=  (host,key,state)=>{
 	//debugger;
 //	console.log("called _createRequest with ",host,key,urlpart,state);
 	let _host = host;
 	if(_.isNil(host)){
-		_host = API_URL;
+		_host = process.env.GKA_API_URL;
 	}else if (!_.isNil(host)){
 		if(_.isFunction(host)){
 			_host = host(state);
