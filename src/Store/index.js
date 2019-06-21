@@ -31,3 +31,24 @@ const factory = (initialState={},middlewares=[])=>{
 };
 
 export default factory;
+
+
+export function createDefaultStoreWithMiddlewares(){
+
+	//redux middlewares
+	let ReduxPromise = require('redux-promise');
+	let ReduxThunk = require('redux-thunk');
+
+	let reduxMiddlewares = [];
+
+	if (process.env.NODE_ENV === 'dev') {
+	 const { logger } = require('redux-logger');
+	 reduxMiddlewares.push(logger);
+	}
+
+	reduxMiddlewares.push(ReduxThunk);
+	reduxMiddlewares.push(ReduxPromise);
+
+	return factory({},reduxMiddlewares)
+
+}
