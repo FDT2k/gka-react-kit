@@ -2,6 +2,7 @@
   "name": "@geekagency/gka-react-kit",
   "version": "1.0.22",
   "description": "react-redux app utils and quick start",
+  "license": "MIT",
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
