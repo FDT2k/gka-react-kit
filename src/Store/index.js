@@ -1,5 +1,3 @@
-
-
 import { combineReducers, createStore,applyMiddleware } from "redux";
 import reducerRegistry from "../Registry";
 
