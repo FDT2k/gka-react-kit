@@ -1,8 +1,8 @@
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import {authenticate} from '../../../Redux/authentication'
+import {authenticate} from "../../../Redux/authentication";
 
-const mapStateToProps = null
+const mapStateToProps = null;
 
 const mapDispatchToProps = { authenticate };
 

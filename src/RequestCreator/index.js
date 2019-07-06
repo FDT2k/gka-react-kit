@@ -3,7 +3,7 @@ import {factory as createRequest,withState} from "../xhr/ajaxfactory";
 
 
 // create a request depending on the given state
-export const request_creator = (store_key = 'session')=>{
+export const request_creator = (store_key = "session")=>{
 	return {
 		authenticated: createRequest(null,()=>{
 			return localStorage.getItem(store_key);

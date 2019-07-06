@@ -5,20 +5,20 @@ import reducerRegistry from "../Registry";
 export const createDefaultStoreWithMiddlewares= ()=>{
 
 	//redux middlewares
-	let {default: ReduxThunk} = require('redux-thunk');
+	let {default: ReduxThunk} = require("redux-thunk");
 
 	let reduxMiddlewares = [];
 
-	if (process.env.NODE_ENV === 'dev') {
-	 const { logger } = require('redux-logger');
-	 reduxMiddlewares.push(logger);
+	if (process.env.NODE_ENV === "dev") {
+		const { logger } = require("redux-logger");
+		reduxMiddlewares.push(logger);
 	}
 
 	reduxMiddlewares.push(ReduxThunk);
 
-	return factory({},reduxMiddlewares)
+	return factory({},reduxMiddlewares);
 
-}
+};
 
 
 const factory = (initialState={},middlewares=[])=>{
