@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Component is rendering 1`] = `
+<h1>
+  test
+</h1>
+`;
+
+exports[`Component is rendering 2`] = `
+<h1>
+  test
+</h1>
+`;
