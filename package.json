@@ -1,6 +1,6 @@
 {
   "name": "@geekagency/gka-react-kit",
-  "version": "1.0.30",
+  "version": "1.0.32",
   "description": "react-redux app utils and quick start",
   "license": "MIT",
   "main": "lib/index.js",
