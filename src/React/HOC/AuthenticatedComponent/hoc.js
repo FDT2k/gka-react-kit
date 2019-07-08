@@ -1,5 +1,8 @@
 /*
 Higher Order Component that redirect if user is not authenticated
+
+if there is a dispatch prop set to true, dispatch the connected action (dispatch_action). cf connect.js for  default action bound to gka auth if not authenticated
+if there is a redirectTo Prop push the value to the history prop if not authenticated
 */
 
 import React,{ Component } from "react";
@@ -16,17 +19,37 @@ export default (Composed) =>{
 			//debugger;
 			this.props.check_session().then(()=>{
 				if (!this.props.authenticated) {
-					this.props.history.push(this.props.redirectTo);
+					if(typeof(this.props.redirectTo) != "undefined"){
+						this.props.history.push(this.props.redirectTo);
+					}
+
+					if(this.props.dispatch === true){
+						console.log('ahi')
+						this.props.dispatch_action();
+
+					}
 				}
 			}).catch(()=>{
         //Err
+				if(this.props.dispatch === true){
+					this.props.dispatch_action();
+
+				}
       });
 		}
 
 		componentDidUpdate(prevProps) {
 			//debugger;
 			if (!this.props.authenticated) {
-				this.props.history.push(this.props.redirectTo);
+				if(typeof(this.props.redirectTo) != "undefined"){
+					this.props.history.push(this.props.redirectTo);
+				}
+
+				if(this.props.dispatch === true){
+					console.log('ahi')
+					this.props.dispatch_action();
+
+				}
 			}
 		}
 
@@ -39,7 +62,8 @@ export default (Composed) =>{
 
   AuthenticationComponent.propTypes = {
     "redirectTo": PropTypes.string.isRequired,
-  	"history": PropTypes.any.isRequired,
+		"history": PropTypes.any,
+  	"dispatch": PropTypes.bool,
   };
 	return AuthenticationComponent;
 }

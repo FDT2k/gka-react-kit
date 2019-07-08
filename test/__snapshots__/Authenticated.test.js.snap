@@ -1,12 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Component is rendering 1`] = `
+exports[`AuthenticatedHOC is dispatching 1`] = `
 <h1>
   test
 </h1>
 `;
 
-exports[`Component is rendering 2`] = `
+exports[`AuthenticatedHOC is rendering 1`] = `
+<h1>
+  test
+</h1>
+`;
+
+exports[`PublicHOC is dipatching 1`] = `
+<h1>
+  test
+</h1>
+`;
+
+exports[`PublicHOC is rendering 1`] = `
 <h1>
   test
 </h1>
