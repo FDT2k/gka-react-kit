@@ -29,8 +29,12 @@ export default (Composed,_defaultProps={}) =>{
 
 					}
 				}
-			}).catch(()=>{
+			}).catch((err)=>{
         //Err
+				if(typeof(this.props.redirectTo) != "undefined"){
+					this.props.history.push(this.props.redirectTo);
+				}
+
 				if(this.props.dispatch === true){
 					this.props.dispatch_action();
 
