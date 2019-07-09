@@ -17,7 +17,6 @@ export default (Composed,_defaultProps={}) =>{
 		}
 		componentDidMount() {
 
-			//debugger;
 			this.props.check_session().then(()=>{
 				if (!this.props.authenticated) {
 					if(typeof(this.props.redirectTo) != "undefined"){
@@ -29,12 +28,11 @@ export default (Composed,_defaultProps={}) =>{
 
 					}
 				}
-			}).catch((err)=>{
+			}).catch(()=>{
         //Err
 				if(typeof(this.props.redirectTo) != "undefined"){
 					this.props.history.push(this.props.redirectTo);
 				}
-
 				if(this.props.dispatch === true){
 					this.props.dispatch_action();
 
@@ -55,7 +53,9 @@ export default (Composed,_defaultProps={}) =>{
 		}
 
 		render() {
-			return <Composed {...this.props} />;
+			//removing used props
+			const { authenticated,redirectTo,fallback,timeout,dispatch, ...passThroughProps } = this.props;
+			return <Composed {...passThroughProps} />;
 		}
 	}
 

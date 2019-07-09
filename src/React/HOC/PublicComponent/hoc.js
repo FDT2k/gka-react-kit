@@ -15,6 +15,7 @@ export default (ComposedComponent,_defaultProps)=> {
     constructor (props){
       super (props)
       this.state = {authenticated:false,display_fallback: false}
+      this.timeout = null;
     }
     componentDidMount() {
 
@@ -37,8 +38,9 @@ export default (ComposedComponent,_defaultProps)=> {
 
         }else{
           this.setState({display_fallback: true})
-          setTimeout(()=>{
+          this.timeout = setTimeout(()=>{
             this.props.history.push(this.props.redirectTo);
+            this.timeout = null;
           },this.props.timeout);
         }
         if(this.props.dispatch === true){
@@ -47,12 +49,22 @@ export default (ComposedComponent,_defaultProps)=> {
       }
     }
 
+    componentWillUnmount(){
+      if(this.timeout !=null){
+        clearTimeout(this.timeout)
+      }
+    }
+
 
     render() {
+      const { authenticated,redirectTo,fallback,timeout,dispatch, ...passThroughProps } = this.props;
+
+      let Fallback = fallback;
       return (
+
         <React.Fragment>
-        { this.state.display_fallback && this.props.fallback}
-        { !this.state.display_fallback && <ComposedComponent {...this.props} />}
+        { this.state.display_fallback && <Fallback {...this.props}/>}
+        { !this.state.display_fallback && <ComposedComponent {...this.passThroughProps} />}
 
         </React.Fragment>
       );

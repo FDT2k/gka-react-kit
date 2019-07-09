@@ -19,6 +19,6 @@ export default  (loader)=>{
     delay: 500
   })
 
-  
-  return props=>(<LoadableComponent/>)
+
+  return props=>(<LoadableComponent {...props}/>)
 }
