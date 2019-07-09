@@ -8,10 +8,11 @@ if there is a redirectTo Prop push the value to the history prop if not authenti
 import React,{ Component } from "react";
 import PropTypes from 'prop-types';
 
-export default (Composed) =>{
+export default (Composed,_defaultProps={}) =>{
 
 	class AuthenticationComponent extends Component {
 		constructor(props){
+			console.log(props)
 			super(props);
 		}
 		componentDidMount() {
@@ -24,7 +25,6 @@ export default (Composed) =>{
 					}
 
 					if(this.props.dispatch === true){
-						console.log('ahi')
 						this.props.dispatch_action();
 
 					}
@@ -44,21 +44,18 @@ export default (Composed) =>{
 				if(typeof(this.props.redirectTo) != "undefined"){
 					this.props.history.push(this.props.redirectTo);
 				}
-
 				if(this.props.dispatch === true){
-					console.log('ahi')
 					this.props.dispatch_action();
-
 				}
 			}
 		}
-
 
 		render() {
 			return <Composed {...this.props} />;
 		}
 	}
 
+	AuthenticationComponent.defaultProps = _defaultProps
 
   AuthenticationComponent.propTypes = {
     "redirectTo": PropTypes.string.isRequired,

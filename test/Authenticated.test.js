@@ -69,7 +69,7 @@ test('PublicHOC is dipatching', () => {
 
 test('AuthenticatedHOC is rendering', () => {
 
-  const C = AuthenticatedHOC(TestComponent)
+  const C = AuthenticatedHOC(TestComponent,{test:'testing'})
   const component = renderer.create(
     <Provider store={store}>
       <C redirectTo="bla" history={{push:()=>{

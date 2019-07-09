@@ -9,7 +9,7 @@ export const createDefaultStoreWithMiddlewares= ()=>{
 
 	let reduxMiddlewares = [];
 
-	if (process.env.NODE_ENV === "dev") {
+	if (process.env.NODE_ENV === "development") {
 		const { logger } = require("redux-logger");
 		reduxMiddlewares.push(logger);
 	}

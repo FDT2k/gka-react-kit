@@ -7,7 +7,7 @@ if there is a redirectTo Prop push the value to the history prop if not authenti
 
 import React, { Component } from 'react';
 
-export default (ComposedComponent)=> {
+export default (ComposedComponent,_defaultProps)=> {
 
   class NotAuthentication extends Component {
     componentWillMount() {
@@ -35,6 +35,7 @@ export default (ComposedComponent)=> {
       return <ComposedComponent {...this.props} />;
     }
   }
+  NotAuthentication.defaultProps = _defaultProps
 
 
   return NotAuthentication;

@@ -1,6 +1,6 @@
 {
   "name": "@geekagency/gka-react-kit",
-  "version": "1.0.32",
+  "version": "1.0.35",
   "description": "react-redux app utils and quick start",
   "license": "MIT",
   "main": "lib/index.js",
@@ -16,6 +16,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-loadable": "^5.5.0",
+    "react-loading": "^2.0.3",
     "react-redux": "^7.1.0",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
