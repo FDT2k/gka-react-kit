@@ -15,6 +15,8 @@ import createStore,{createDefaultStoreWithMiddlewares} from '../src/Store';
 
 import ReduxThunk from 'redux-thunk';
 
+
+// callback middleware for redux
 const cb_test_mw = cb => store => next => action => {
   cb(action);
   next(action);

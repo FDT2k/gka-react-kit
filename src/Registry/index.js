@@ -24,7 +24,7 @@ export class ReducerRegistry {
 
 const reducerRegistry = new ReducerRegistry();
 
-//add an initial reducer
-reducerRegistry.register("_app",(state={})=>{return state;});
+//add an initial reducer redux seems to not like to not have at least one.
+reducerRegistry.register("_app",(state={session_store_key:'session'})=>{return state;});
 
 export default reducerRegistry;

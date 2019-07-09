@@ -20,12 +20,12 @@ export const actions = {
 export default function reducer(state={authenticated:false},action){
 	//console.log(action);
 	switch(action.type) {
-	case actions.AUTHENTICATED:
-		return { ...state, authenticated: true };
-	case actions.UNAUTHENTICATED:
-		return { ...state, authenticated: false };
-	case actions.AUTHENTICATION_ERROR:
-		return { ...state, authenticated: false, error: action.payload };
+		case actions.AUTHENTICATED:
+			return { ...state, authenticated: true };
+		case actions.UNAUTHENTICATED:
+			return { ...state, authenticated: false };
+		case actions.AUTHENTICATION_ERROR:
+			return { ...state, authenticated: false, error: action.payload };
 	}
 	return state;
 }
