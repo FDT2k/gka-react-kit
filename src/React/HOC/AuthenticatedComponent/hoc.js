@@ -42,7 +42,7 @@ export default (Composed,_defaultProps={}) =>{
 
 		componentDidUpdate(prevProps) {
 			//debugger;
-			if (!this.props.authenticated) {
+			if (prevProps.authenthicated && !this.props.authenticated) {
 				if(typeof(this.props.redirectTo) != "undefined"){
 					this.props.history.push(this.props.redirectTo);
 				}

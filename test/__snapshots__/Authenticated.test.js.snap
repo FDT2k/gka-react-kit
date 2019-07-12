@@ -1,25 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AuthenticatedHOC is dispatching 1`] = `
-<h1>
-  test
-</h1>
-`;
+exports[`AuthenticatedHOC is dispatching 1`] = `null`;
 
-exports[`AuthenticatedHOC is rendering 1`] = `
-<h1>
-  test
-</h1>
-`;
+exports[`AuthenticatedHOC is rendering 1`] = `null`;
 
-exports[`PublicHOC is dipatching 1`] = `
-<h1>
-  test
-</h1>
-`;
+exports[`PublicHOC is dipatching 1`] = `null`;
 
-exports[`PublicHOC is rendering 1`] = `
-<h1>
-  test
-</h1>
-`;
+exports[`PublicHOC is rendering 1`] = `null`;

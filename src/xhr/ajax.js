@@ -2,32 +2,37 @@
 import axios from "axios";
 import _ from "lodash";
 
-export const _createRequest=  (host,key,state)=>{
-	//debugger;
-//	console.log("called _createRequest with ",host,key,urlpart,state);
-	let _host = host;
+
+
+export const create_axios_request =  (host,headers={},timeout=3000,state={})=>{
+
+
 	if(_.isNil(host)){
-		_host = process.env.GKA_API_URL;
+		host = process.env.GKA_API_URL;
 	}else if (!_.isNil(host)){
 		if(_.isFunction(host)){
-			_host = host(state);
-		}else{
-			_host = host;
+			host = host(state);
 		}
 	}
 	let axios_opts = {
-		baseURL: _host,
-		timeout: 3000
+		baseURL: host,
+		timeout: timeout
 	};
-	if(typeof(key)!="undefined"){
-		if(_.isFunction(key)){
-			axios_opts.headers={"x-api-auth":key(state)};
+
+	if(typeof(headers)!="undefined"){
+		if(_.isFunction(headers)){
+			axios_opts.headers= headers(state)
 		}else{
-			axios_opts.headers={"x-api-auth":key};
+			axios_opts.headers= headers;
 		}
 	}
 	return axios.create(axios_opts);
 };
 
+const create_axios_from_settings = (settings)=>{
+		return create_axios_request(settings.host,settings.headers,settings.timeout,settings.state);
+}
+
+
 //retrocompatiblity with existing actions
-export const createRequest = _createRequest.bind(null,undefined,undefined);
+export const createRequest = create_axios_request.bind(null,undefined,undefined,undefined);

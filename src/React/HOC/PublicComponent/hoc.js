@@ -26,7 +26,7 @@ export default (ComposedComponent,_defaultProps)=> {
     }
 
     componentDidUpdate(prevProps){
-      if(!this.props.authenticated){
+      if(prevProps.authenticated && !this.props.authenticated){
         this.setState({display_fallback:false})
       }
       if (!prevProps.authenticated && this.props.authenticated) {
