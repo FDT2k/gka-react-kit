@@ -20,7 +20,7 @@ export const createDefaultStoreWithMiddlewares= ()=>{
 
 };
 
-
+let store = null;
 const factory = (initialState={},middlewares=[])=>{
 
 	// Preserve initial state for not-yet-loaded reducers
@@ -38,7 +38,7 @@ const factory = (initialState={},middlewares=[])=>{
 	const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
 
 	const reducer = combine(reducerRegistry.getReducers());
-	const store = createStoreWithMiddleware(reducer,initialState);
+	store = createStoreWithMiddleware(reducer,initialState);
 
 	// Replace the store's reducer whenever a new reducer is registered.
 	reducerRegistry.setChangeListener(reducers => {
@@ -47,5 +47,9 @@ const factory = (initialState={},middlewares=[])=>{
 
 	return store;
 };
+
+const getStore = ()=>{
+	return store;
+}
 
 export default factory;
