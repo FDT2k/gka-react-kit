@@ -64,7 +64,7 @@ const factory = (request_creator, actions, store_key ="session")=>{
 			try {
 				var res = await  request_creator(getState()).authenticated().get("/user/current");
 				dispatch({ type: actions.AUTHENTICATED});
-				return res;
+				return Promise.resolve(res);
 
 			} catch(error) {
 

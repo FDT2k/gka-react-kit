@@ -12,11 +12,12 @@ export const gka_authentication = (settings)=> ({...settings,headers:(state)=>({
 export const jwt_authentication = (settings)=> ({...settings,headers:(state)=>({'Authorization': 'Bearer ' +localStorage.getItem(state._app.session_store_key)})})
 
 
+
 // create a request depending on the given state
 export const request_creator = (state)=>{
 	return {
 		authenticated: createRequest(null,()=>{
-			return localStorage.getItem(state._app.session_store_key);
+			return {'x-api-auth':localStorage.getItem(state._app.session_store_key)};
 		}),
 		public:createRequest(null,null)
 	};

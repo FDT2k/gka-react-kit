@@ -29,7 +29,7 @@ export const create_axios_request =  (host,headers={},timeout=3000,state={})=>{
 	return axios.create(axios_opts);
 };
 
-const create_axios_from_settings = (settings)=>{
+export const create_axios_from_settings = (settings)=>{
 		return create_axios_request(settings.host,settings.headers,settings.timeout,settings.state);
 }
 

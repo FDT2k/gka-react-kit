@@ -34,6 +34,9 @@ const create_axios_request =  (host,headers={},timeout=3000,state={})=>{
 };
 
 
+const create_axios_from_settings = (settings)=>{
+		return create_axios_request(settings.host,settings.headers,settings.timeout,settings.state);
+}
 
 function createRequest(host,auth_key){
 	return _createRequest.bind(null,host,auth_key);
@@ -60,39 +63,8 @@ const compose = (...functions) => data =>{
   }, data)
 }
 
-
-
-
-function request_factory(host,auth_key){
-	return _createRequest.bind(null,host,auth_key);
-}
-
-/*
-function withState(state){
-	//debugger;
-	return function (_next_factory){
-		return _next_factory(state);
-	};
-}*/
-
-
-const request_creator = (state)=>{
-//  console.log(state)
-	return ()=>({
-		authenticated: createRequest(null,()=>{
-		//	return localStorage.getItem(state._app.session_store_key);
-		}),
-		public:createRequest(null,null)
-	});
-};
-/*
-
-const authenticated = (settings)=>{
-  console.log('authenticated', settings)
-  settings.host = 'lol.com';
-
-}
-*/
+const _pipe = (a, b) => (arg) => b(a(arg));
+const pipe = (...ops) => ops.reduce(_pipe);
 
 
 let state ={'coucou':'monde',_app:'test'}
@@ -103,7 +75,12 @@ const b = settings => ({...settings,'b':true})
 const c = settings => ({...settings,'c':true})
 
 
-const final = settings=>{console.log(settings)}
+const final = settings=>{ return (settings)=>{
+
+  console.log(settings)
+  debugger;
+  return create_axios_request();
+}}
 
 const res = compose(a,b,c);
 
@@ -125,11 +102,18 @@ const withState = state=> (settings)=>({...settings,state})
 
 const authenticated = (settings)=> ({...settings,host:(state)=>(state.host)})
 
+const request_creator = settings=> {  return create_axios_from_settings(settings)}
 
  let test = redux_compose(a,c,withState({'host':'prout.com'}),authenticated);
-console.log(test)
-console.log(test(final))
+console.log('composite', test)
+console.log('dafuk',test(request_creator))
 
+
+let request_creator_auth = pipe(a,c,withState({host:'test.com'}),authenticated,request_creator);
+debugger;
+console.log('piping',request_creator_auth().get('helloworld').then(res=>{
+  console.log(res.data)
+}))
 
 
 /*let res = withState(state)(authenticated)
