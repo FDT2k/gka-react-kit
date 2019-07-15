@@ -48,7 +48,7 @@ const factory = (initialState={},middlewares=[])=>{
 	return store;
 };
 
-const getStore = ()=>{
+export const getStore = ()=>{
 	return store;
 }
 

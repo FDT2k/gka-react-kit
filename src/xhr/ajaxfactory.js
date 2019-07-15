@@ -1,3 +1,4 @@
+//old way, should disappear
 import {create_axios_request as _createRequest} from  "./ajax";
 
 export function factory(host,auth_key){

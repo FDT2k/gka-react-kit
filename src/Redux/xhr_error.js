@@ -9,15 +9,11 @@ export const actions = {
 };
 
 
-export default function reducer(state={authenticated:false},action){
+export default function reducer(state=[],action){
 	//console.log(action);
 	switch(action.type) {
-		case actions.AUTHENTICATED:
-			return { ...state, authenticated: true };
-		case actions.UNAUTHENTICATED:
-			return { ...state, authenticated: false };
-		case actions.AUTHENTICATION_ERROR:
-			return { ...state, authenticated: false, error: action.payload };
+		case actions.ADD_ERROR:
+      return [...state,action.payload]
 	}
 	return state;
 }
@@ -29,18 +25,18 @@ reducerRegistry.register(reducerName, reducer);
 export function dispatchWithErrorHandling(request,action){
   return  async (dispatch,getState)=>{
 		try {
-			let result = await request();
+			let result = await request;
 			dispatch({
 				type:action,
 				payload: result.data
 			})
       return Promise.resolve(result.data);
-		}catch {
+		}catch (error) {
 			dispatch({
-				type: ADD_ERROR,
-				payload: err
+				type: actions.ADD_ERROR,
+				payload: error
 			});
-			return Promise.reject(err)
+			return Promise.reject(error)
 		}
   }
 }
