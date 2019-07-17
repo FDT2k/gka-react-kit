@@ -12,7 +12,6 @@ export default (Composed,_defaultProps={}) =>{
 
 	class AuthenticationComponent extends Component {
 		constructor(props){
-			console.log(props)
 			super(props);
 			this.state = {authenticated:true}
 		}

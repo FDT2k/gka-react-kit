@@ -9,7 +9,7 @@ export const actions = {
 };
 
 
-export default function reducer(state=[],action){
+export function reducer(state=[],action){
 	//console.log(action);
 	switch(action.type) {
 		case actions.ADD_ERROR:
@@ -22,21 +22,25 @@ export default function reducer(state=[],action){
 reducerRegistry.register(reducerName, reducer);
 
 
-export function dispatchWithErrorHandling(request,action){
+export function dispatchWithErrorHandling(request,action,meta={}){
   return  async (dispatch,getState)=>{
 		try {
 			let result = await request;
 			dispatch({
 				type:action,
-				payload: result.data
+				payload: result.data,
+				meta
 			})
       return Promise.resolve(result.data);
 		}catch (error) {
-			dispatch({
+
+			let err_action = {
 				type: actions.ADD_ERROR,
-				payload: error
-			});
-			return Promise.reject(error)
+				payload: error,
+				meta: {action,...meta}
+			}
+			dispatch(err_action);
+			return Promise.reject(err_action)
 		}
   }
 }

@@ -49,6 +49,9 @@ const factory = (initialState={},middlewares=[])=>{
 };
 
 export const getStore = ()=>{
+	if(store ==null){
+		console.warn('hey store is null, maybe you didnt created it from here')
+	}
 	return store;
 }
 

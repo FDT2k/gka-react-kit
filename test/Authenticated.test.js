@@ -1,8 +1,10 @@
 // Link.react.test.js
-import "babel-polyfill"
+import "@babel/polyfill"
 import React from 'react';
-import AuthenticatedHOC,{HOC as AuthHOC} from '../src/React/HOC/AuthenticatedComponent';
-import PublicHOC,{HOC as PubHOC} from '../src/React/HOC/PublicComponent';
+import createStore,{createDefaultStoreWithMiddlewares} from '../src/Store';
+
+import AuthHOC from '../src/React/HOC/AuthenticatedComponent/hoc';
+import PubHOC from '../src/React/HOC/PublicComponent/hoc';
 import { Provider,connect } from 'react-redux';
 global.window = {}
 import 'mock-local-storage'
@@ -10,11 +12,11 @@ import 'mock-local-storage'
 
 import renderer,{act} from 'react-test-renderer';
 
-import createStore,{createDefaultStoreWithMiddlewares} from '../src/Store';
 
 
 import ReduxThunk from 'redux-thunk';
 
+let store = createDefaultStoreWithMiddlewares();
 
 // callback middleware for redux
 const cb_test_mw = cb => store => next => action => {
@@ -22,7 +24,6 @@ const cb_test_mw = cb => store => next => action => {
   next(action);
 }
 
-let store = createDefaultStoreWithMiddlewares();
 
 class TestComponent extends React.Component {
 
@@ -43,6 +44,15 @@ let mock_check_session = ()=>{
   }
 }
 
+let mock_check_session_fails= ()=>{
+  return (dispatch,getState)=>{
+    dispatch({type:'check_session' }) ;
+    return new Promise((resolve,reject)=>{
+      reject();
+    })
+  }
+}
+
 let mock_dispatch = ()=>{
   return (dispatch,getState)=>{
     dispatch({type:'dispatch' }) ;
@@ -54,6 +64,7 @@ let mock_dispatch = ()=>{
 }
 
 let mock_connect = connect(null, {check_session:mock_check_session,dispatch_action:mock_dispatch});
+let mock_connect_fails = connect(null, {check_session:mock_check_session_fails,dispatch_action:mock_dispatch});
 
 test('PublicHOC is rendering', () => {
   return new Promise ((resolve,reject)=>{
@@ -78,7 +89,6 @@ test('PublicHOC is dipatching', () => {
   return new Promise ((resolve,reject)=>{
 
     let store = createStore({auth:{authenticated:true}},[ReduxThunk,cb_test_mw((action)=>{
-      console.log(action.type)
       if(action.type == 'dispatch'){
         resolve();
       }
@@ -106,8 +116,9 @@ test('PublicHOC is dipatching', () => {
 
 test('AuthenticatedHOC is rendering', () => {
   return new Promise ((resolve,reject)=>{
-
-    const C = AuthenticatedHOC(TestComponent,{test:'testing'})
+    let store = createStore({auth:{authenticated:false}},[ReduxThunk,cb_test_mw((action)=>{
+    })]);
+    const C = mock_connect(AuthHOC(TestComponent))
     act(()=>{
 
       const component = renderer.create(
@@ -117,6 +128,7 @@ test('AuthenticatedHOC is rendering', () => {
       );
       let tree = component.toJSON();
       expect(tree).toMatchSnapshot();
+      resolve();
     });
   });
 });
@@ -124,7 +136,7 @@ test('AuthenticatedHOC is rendering', () => {
 
 test('AuthenticatedHOC is dispatching', () => {
   return new Promise ((resolve,reject)=>{
-    const C = mock_connect(AuthHOC(TestComponent,{
+    const C = mock_connect_fails(AuthHOC(TestComponent,{
       history: {push:(item)=>{}}
     }))
     let store = createStore({},[ReduxThunk,cb_test_mw((action)=>{
@@ -138,8 +150,7 @@ test('AuthenticatedHOC is dispatching', () => {
 
       const component = renderer.create(
         <Provider store={store}>
-          <C redirectTo="bla" dispatch={true}
-          />
+          <C redirectTo="bla" dispatch={true}/>
         </Provider>
     );
     let tree = component.toJSON();
