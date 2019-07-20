@@ -6,15 +6,14 @@ import pipe from 'lodash/fp/flow';
 import {getStore} from '../Store';
 import {create_axios_from_settings} from "../xhr/ajax";
 
-export const withState = state=> (settings)=>({...settings,state})
+export const withState =  (settings)=>({...settings,state:getStore().getState()})
 
 export const gka_authentication = (settings)=> ({...settings,headers:(state)=>({'x-api-auth':localStorage.getItem(state._app.session_store_key)})})
 
 export const jwt_authentication = (settings)=> ({...settings,headers:(state)=>({'Authorization': 'Bearer ' +localStorage.getItem(state._app.session_store_key)})})
 
-
 let authenticated_pipe =  pipe(
-  withState(getStore().getState()),
+  withState,
   gka_authentication,
   create_axios_from_settings
 );
@@ -22,7 +21,7 @@ let authenticated_pipe =  pipe(
 export const authenticated_request = authenticated_pipe
 
 let public_pipe =  pipe(
-  withState(getStore().getState()),
+  withState,
   create_axios_from_settings
 );
 export const public_request = public_pipe;
