@@ -2,7 +2,7 @@
 import {factory as createRequest,withState as _withState} from "../xhr/ajaxfactory";
 
 /*composing requests for the app*/
-import pipe from 'lodash/fp/flow';
+import {pipe} from '@geekagency/composite-js';
 import {getStore} from '../Store';
 import {create_axios_from_settings} from "../xhr/ajax";
 

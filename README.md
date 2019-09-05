@@ -1,1 +1,1 @@
-gka-react-redux-starter
+GKA React Kit

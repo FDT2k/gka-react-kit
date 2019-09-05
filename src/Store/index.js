@@ -38,6 +38,7 @@ const factory = (initialState={},middlewares=[])=>{
 	const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
 
 	const reducer = combine(reducerRegistry.getReducers());
+
 	store = createStoreWithMiddleware(reducer,initialState);
 
 	// Replace the store's reducer whenever a new reducer is registered.
